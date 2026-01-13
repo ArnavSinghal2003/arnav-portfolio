@@ -37,6 +37,18 @@ const Projects = () => {
       featured: false,
     },
     {
+      title: "Stock Market Analytics Dashboard",
+      description: "Built an end-to-end stock market analytics platform to analyze price trends, returns, and volatility using real market data.",
+      highlights: [
+        "Calculated daily returns and volatility to assess stock risk",
+        "Applied moving averages for technical trend analysis",
+        "Designed an interactive Power BI dashboard for decision-making",
+      ],
+      technologies: ["Python", "SQL", "Power BI"],
+      github: "https://github.com/ArnavSinghal2003/Stock-Market-Analytics",
+      demo: "https://drive.google.com/file/d/1Q11iU_xNQ7ENICneVGvTcP2x5tMRireZ/view?usp=sharing",
+    },
+    {
       title: "Dr.Medilyf",
       description: "A healthcare platform that enhances access to quality care through technology. It connects patients with providers, improving affordability and convenience.",
       highlights: [
