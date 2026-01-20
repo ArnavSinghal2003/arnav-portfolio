@@ -31,7 +31,7 @@ const Projects = () => {
         "Ensured clear frontend–backend separation for scalability",
         "Emphasized usability, performance, and clean code structure",
       ],
-      technologies: ["TypeScript", "JavaScript", "HTML/CSS", "Git", "Node.js", "Express.js", "MongoDB"],
+      technologies: ["Angular", "TypeScript", "JavaScript", "HTML/CSS", "Git", "Node.js", "Express.js", "MongoDB", "Postman", "Jenkins", "Docker"],
       github: "https://github.com/ArnavSinghal2003/Insurix",
       demo: "https://demo.com",
       featured: false,
