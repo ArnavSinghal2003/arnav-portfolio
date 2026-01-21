@@ -37,6 +37,19 @@ const Projects = () => {
       featured: false,
     },
     {
+      title: "Algorithmic Trading System",
+      description: "Built a Python-based algorithmic trading system that implements rule-based strategies, backtests them on historical market data, and evaluates performance using risk-adjusted metrics with clear visual insights.",
+      highlights: [
+        "Implemented trading strategies such as Moving Average Crossover and RSI",
+        "Developed a backtesting engine to simulate historical trades",
+        "Evaluated performance using Sharpe Ratio and Maximum Drawdown",
+        "Created visualizations and an interactive dashboard for strategy analysis",
+      ],
+      technologies: ["Python", "Pandas", "numpy", "Streamlit", "Data Visualization & Analytics", "Algorithmic Trading & Technical Analysis"],
+      github: "https://github.com/ArnavSinghal2003/Algorithmic-Trading-System",
+      demo: "https://algorithmic-trading-system.streamlit.app/",
+    },
+    {
       title: "Stock Market Analytics Dashboard",
       description: "Built an end-to-end stock market analytics platform to analyze price trends, returns, and volatility using real market data.",
       highlights: [
