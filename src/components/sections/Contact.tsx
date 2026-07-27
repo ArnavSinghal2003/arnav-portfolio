@@ -1,183 +1,165 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { Mail, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
+import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import Panel from "@/components/terminal/Panel";
 import { useToast } from "@/hooks/use-toast";
 
-const Contact = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { toast } = useToast();
+const VENUES = [
+  {
+    icon: Mail,
+    code: "DIRECT",
+    label: "arnavsinghal03@gmail.com",
+    href: "mailto:arnavsinghal03@gmail.com",
+  },
+  {
+    icon: Github,
+    code: "GITHUB",
+    label: "github.com/ArnavSinghal2003",
+    href: "https://github.com/ArnavSinghal2003",
+  },
+  {
+    icon: Linkedin,
+    code: "LNKD",
+    label: "linkedin.com/in/arnav-singhal",
+    href: "https://www.linkedin.com/in/arnav-singhal-b25697268/",
+  },
+  {
+    icon: MapPin,
+    code: "VENUE",
+    label: "NOIDA, INDIA (IST)",
+    href: null,
+  },
+];
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+const Contact = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Message sent!",
-      description: "Thank you for reaching out. I'll get back to you soon!",
+      title: "ORDER ROUTED ✓",
+      description: "BUY ARNAV order received. Execution confirmation within 24 hours.",
     });
     setFormData({ name: "", email: "", message: "" });
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "arnavsinghal03@gmail.com",
-      href: "mailto:arnavsinghal03@gmail.com",
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "Bangalore, India",
-      href: null,
-    },
-  ];
-
-  const socialLinks = [
-    { icon: Github, href: "https://github.com/ArnavSinghal2003", label: "GitHub" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/arnav-singhal-b25697268/", label: "LinkedIn" },
-  ];
+  const fieldClass =
+    "w-full bg-background border border-border px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-up/70 focus:ring-1 focus:ring-up/40 transition-colors";
 
   return (
-    <section id="contact" className="py-24 px-6" ref={ref}>
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <p className="text-accent font-medium tracking-wide uppercase text-sm mb-3">
-            Let's connect
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Get in Touch
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Have a project in mind or just want to say hello? I'd love to hear from you!
-          </p>
-        </motion.div>
+    <Panel id="contact" code="MSG" title="Order Ticket — Get In Touch" note="MARKET ORDER · TIF: GTC">
+      <div className="grid lg:grid-cols-5 gap-6">
+        {/* Order form */}
+        <form onSubmit={handleSubmit} className="lg:col-span-3 border border-border/70 bg-secondary/20">
+          <div className="flex items-center border-b border-border/60">
+            <span className="bg-up/20 text-up border-r border-up/40 font-extrabold text-sm tracking-widest px-5 py-3">
+              BUY
+            </span>
+            <span className="text-foreground font-bold text-sm tracking-widest px-4">ARNAV</span>
+            <span className="text-muted-foreground text-[10px] tracking-wider ml-auto pr-4 hidden sm:block">
+              QTY: 1 FULL-TIME ENGINEER
+            </span>
+          </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h3 className="font-display text-2xl font-bold text-foreground mb-6">
-              Contact Information
-            </h3>
-
-            <div className="space-y-4 mb-8">
-              {contactInfo.map((info) => (
-                <div key={info.label} className="flex items-center gap-4">
-                  <div className="p-3 rounded-xl bg-accent/10 text-accent">
-                    <info.icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">{info.label}</p>
-                    {info.href ? (
-                      <a
-                        href={info.href}
-                        className="text-foreground font-medium hover:text-accent transition-colors"
-                      >
-                        {info.value}
-                      </a>
-                    ) : (
-                      <p className="text-foreground font-medium">{info.value}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <h4 className="font-display text-lg font-semibold text-foreground mb-4">
-              Follow Me
-            </h4>
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-secondary hover:bg-accent hover:text-white transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="p-4 md:p-5 space-y-4">
+            <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                  Name
+                <label htmlFor="name" className="block text-[10px] tracking-widest text-muted-foreground mb-1.5">
+                  COUNTERPARTY NAME
                 </label>
-                <Input
+                <input
                   id="name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Your name"
+                  placeholder="YOUR NAME"
                   required
-                  className="bg-card border-border"
+                  className={fieldClass}
                 />
               </div>
-
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                  Email
+                <label htmlFor="email" className="block text-[10px] tracking-widest text-muted-foreground mb-1.5">
+                  SETTLEMENT EMAIL
                 </label>
-                <Input
+                <input
                   id="email"
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="your@email.com"
+                  placeholder="YOU@FIRM.COM"
                   required
-                  className="bg-card border-border"
+                  className={fieldClass}
                 />
               </div>
+            </div>
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Tell me about your project or just say hi..."
-                  rows={5}
-                  required
-                  className="bg-card border-border resize-none"
-                />
-              </div>
+            <div>
+              <label htmlFor="message" className="block text-[10px] tracking-widest text-muted-foreground mb-1.5">
+                ORDER NOTES
+              </label>
+              <textarea
+                id="message"
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                placeholder="ROLE, PROJECT, OR JUST SAY HI…"
+                rows={5}
+                required
+                className={`${fieldClass} resize-none font-sans-body`}
+              />
+            </div>
 
-              <Button type="submit" variant="hero" size="lg" className="w-full">
-                <Send className="w-4 h-4 mr-2" />
-                Send Message
-              </Button>
-            </form>
-          </motion.div>
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="submit"
+                className="bg-up/15 border border-up/60 text-up font-extrabold text-sm tracking-widest px-8 py-3 hover:bg-up/25 transition-colors"
+              >
+                SUBMIT ORDER
+              </button>
+              <p className="text-[10px] text-muted-foreground tracking-wider">
+                NO COMMISSION · NO SLIPPAGE · RESPONSE ≤ 24H
+              </p>
+            </div>
+          </div>
+        </form>
+
+        {/* Execution venues */}
+        <div className="lg:col-span-2">
+          <h3 className="text-primary text-xs tracking-widest mb-3">EXECUTION VENUES</h3>
+          <div className="divide-y divide-border/50 border border-border/60">
+            {VENUES.map((v) => {
+              const inner = (
+                <div className="flex items-center gap-3 px-4 py-3.5">
+                  <v.icon className="w-4 h-4 text-accent shrink-0" />
+                  <span className="text-muted-foreground text-[10px] tracking-widest w-14 shrink-0">
+                    {v.code}
+                  </span>
+                  <span className="text-foreground text-xs tracking-wide truncate">{v.label}</span>
+                </div>
+              );
+              return v.href ? (
+                <a
+                  key={v.code}
+                  href={v.href}
+                  target={v.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  className="block hover:bg-secondary/50 transition-colors"
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div key={v.code}>{inner}</div>
+              );
+            })}
+          </div>
+
+          <div className="mt-4 border border-border/60 bg-secondary/40 p-3">
+            <p className="text-[10px] text-muted-foreground tracking-wider leading-relaxed">
+              PRO TIP: TYPE <span className="text-primary">BUY</span> IN THE COMMAND LINE BELOW.
+              SHORT ORDERS WILL BE REJECTED BY THE EXCHANGE.
+            </p>
+          </div>
         </div>
       </div>
-    </section>
+    </Panel>
   );
 };
 

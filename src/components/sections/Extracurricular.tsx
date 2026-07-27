@@ -1,105 +1,100 @@
 import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { Trophy, Users, Award, Flag, Heart } from "lucide-react";
+import Panel from "@/components/terminal/Panel";
+import CountUp from "@/components/fx/CountUp";
+
+const IMPACT_METRICS = [
+  { value: 1000, suffix: "+", label: "STUDENTS TRAINED", bar: 100 },
+  { value: 500, suffix: "+", label: "WORKSHOP ATTENDEES", bar: 72 },
+  { value: 50, suffix: "+", label: "STUDENTS MENTORED", bar: 48 },
+  { value: 4, suffix: " YRS", label: "BLOOD DRIVE VOLUNTEERING", bar: 60 },
+];
+
+const GOVERNANCE = [
+  {
+    org: "INTERNET OF THINGS COMMUNITY",
+    role: "SENIOR CORE — STUDENT CLUB",
+    period: "2022–2024",
+    note: "Conducted technical & soft-skills training impacting over 1000 students.",
+    award: "OUTSTANDING CONTRIBUTION AWARD",
+  },
+  {
+    org: "INSTITUTION OF ENGINEERING & TECHNOLOGY",
+    role: "SENIOR CORE — CHAPTER",
+    period: "2021–2023",
+    note: "Organized workshops, hackathons, and tech talks for 500+ students, fostering a culture of innovation.",
+    award: "BEST EVENT AWARD",
+  },
+  {
+    org: "YOUTH RED CROSS ASSOCIATION",
+    role: "SENIOR VOLUNTEER",
+    period: "2021–2025",
+    note: "Conducted and helped organize regular blood donation drives in collaboration with local hospitals.",
+    award: "COMMUNITY IMPACT AWARD",
+  },
+  {
+    org: "CODING CLUB",
+    role: "SENIOR MENTOR",
+    period: "2021–2023",
+    note: "Mentored 50+ junior students in data structures, algorithms, and competitive programming.",
+    award: "BEST MENTOR RECOGNITION",
+  },
+];
 
 const Extracurricular = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const activities = [
-    {
-      icon: Users,
-      title: "Internet of Things Community",
-      role: "Senior Core - Student Club",
-      period: "2022 - 2024",
-      description: "Conducted technical & soft-skills training impacting over 1000 students.",
-      achievement: "Outstanding Contribution Award",
-    },
-    {
-      icon: Users,
-      title: "The Institution of Engineering and Technology",
-      role: "Senior Core – Chapter",
-      period: "2021 - 2023",
-      description: "Organized workshops, hackathons, and tech talks for 500+ students, fostering a culture of innovation.",
-      achievement: "Best Event Award",
-    },
-    {
-      icon: Heart,
-      title: "Youth Red Cross Association",
-      role: "Senior Volunteer",
-      period: "2021 - 2025",
-      description: " Conducted and participated in organizing regular blood donation drives in collaboration with local hospitals.",
-      achievement: "Community Impact Award",
-    },
-    {
-      icon: Flag,
-      title: "Coding Club Mentor",
-      role: "Senior Mentor",
-      period: "2021 - 2023",
-      description: "Mentored 50+ junior students in data structures, algorithms, and competitive programming.",
-      achievement: "Best Mentor Recognition",
-    },
-  ];
-
   return (
-    <section id="extracurricular" className="py-24 px-6 bg-secondary/50" ref={ref}>
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <p className="text-accent font-medium tracking-wide uppercase text-sm mb-3">
-            Beyond academics
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
-            Extracurricular Activities
-          </h2>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {activities.map((activity, index) => (
-            <motion.div
-              key={activity.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-card p-6 rounded-2xl shadow-card hover:shadow-elevated transition-all duration-300 group"
-            >
-              <div className="flex gap-4">
-                <div className="p-3 rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-white transition-all duration-300 h-fit">
-                  <activity.icon className="w-6 h-6" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-2 mb-2">
-                    <h3 className="font-display text-lg font-bold text-foreground">
-                      {activity.title}
-                    </h3>
-                    <span className="px-2 py-0.5 text-xs bg-accent/10 text-accent rounded-full font-medium">
-                      {activity.period}
-                    </span>
-                  </div>
-                  <p className="text-accent font-medium text-sm mb-2">
-                    {activity.role}
-                  </p>
-                  <p className="text-muted-foreground text-sm mb-3 leading-relaxed">
-                    {activity.description}
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <Award className="w-4 h-4 text-accent" />
-                    <span className="text-sm font-medium text-foreground">
-                      {activity.achievement}
-                    </span>
-                  </div>
-                </div>
+    <Panel id="extracurricular" code="ESG" title="Social Impact Report" note="E—N/A · S—EXCEPTIONAL · G—AWARDED">
+      <div className="grid lg:grid-cols-5 gap-6">
+        {/* Impact metrics */}
+        <div className="lg:col-span-2 space-y-5">
+          <h3 className="text-primary text-xs tracking-widest">SOCIAL METRICS</h3>
+          {IMPACT_METRICS.map((m) => (
+            <div key={m.label}>
+              <div className="flex items-baseline justify-between mb-1">
+                <span className="text-up font-extrabold text-2xl tabular-nums text-glow-up">
+                  <CountUp target={m.value} suffix={m.suffix} />
+                </span>
+                <span className="text-muted-foreground text-[10px] tracking-widest">{m.label}</span>
               </div>
-            </motion.div>
+              <div className="h-1.5 bg-muted overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${m.bar}%` }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.9, ease: "easeOut" }}
+                  className="h-full bg-up"
+                  style={{ opacity: 0.85 }}
+                />
+              </div>
+            </div>
           ))}
+
+          <div className="border border-border/60 bg-secondary/40 p-3 mt-2">
+            <p className="text-[10px] text-muted-foreground tracking-wider leading-relaxed">
+              ESG SCORE: SIGNIFICANTLY ABOVE SECTOR AVERAGE. ASSET DEMONSTRATES CONSISTENT
+              COMMUNITY REINVESTMENT OF TIME AND EXPERTISE.
+            </p>
+          </div>
+        </div>
+
+        {/* Governance / roles */}
+        <div className="lg:col-span-3">
+          <h3 className="text-primary text-xs tracking-widest mb-3">GOVERNANCE RECORD — ROLES & AWARDS</h3>
+          <div className="divide-y divide-border/50 border border-border/60">
+            {GOVERNANCE.map((g) => (
+              <div key={g.org} className="px-4 py-3">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span className="text-foreground font-bold text-xs tracking-wide">{g.org}</span>
+                  <span className="text-accent text-[10px] tracking-widest">{g.role}</span>
+                  <span className="text-muted-foreground text-[10px] tabular-nums ml-auto">{g.period}</span>
+                </div>
+                <p className="font-sans-body text-[13px] text-foreground/75 leading-relaxed mt-1.5">{g.note}</p>
+                <p className="text-up text-[10px] tracking-widest mt-1.5">🏆 {g.award}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
+    </Panel>
   );
 };
 

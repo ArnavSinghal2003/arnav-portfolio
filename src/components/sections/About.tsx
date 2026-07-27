@@ -1,110 +1,101 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { GraduationCap, Lightbulb, Target } from "lucide-react";
+import Panel from "@/components/terminal/Panel";
+
+const KEY_FACTS = [
+  ["INCORPORATED", "NOIDA, INDIA"],
+  ["LISTED", "AUG 2021 (VIT VELLORE)"],
+  ["HQ", "NOIDA, INDIA"],
+  ["CURRENT DESK", "S&P GLOBAL — EDITORIAL"],
+  ["CORE BUSINESS", "DATA VIZ ENGINEERING"],
+  ["GROWTH SEGMENTS", "AI · GENAI · AUTOMATION"],
+  ["DIVIDEND POLICY", "SHIPS FEATURES QUARTERLY"],
+];
 
 const About = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const highlights = [
-    {
-      icon: GraduationCap,
-      title: "Education",
-      description: "B.Tech in Computer Science from Vellore Institute of Technology (VIT)",
-    },
-    {
-      icon: Lightbulb,
-      title: "Philosophy",
-      description: "Turning complex problems into elegant, user-centric solutions",
-    },
-    {
-      icon: Target,
-      title: "Focus",
-      description: "Building technology that creates real-world impact",
-    },
-  ];
-
   return (
-    <section id="about" className="py-24 px-6" ref={ref}>
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <p className="text-accent font-medium tracking-wide uppercase text-sm mb-3">
-            Get to know me
+    <Panel id="about" code="DES" title="Security Description" note="ARNAV SINGHAL — PROFILE">
+      <div className="grid lg:grid-cols-5 gap-6">
+        {/* Business description */}
+        <div className="lg:col-span-3 space-y-4">
+          <h3 className="text-primary text-xs tracking-widest">BUSINESS DESCRIPTION</h3>
+          <p className="font-sans-body text-foreground/90 leading-relaxed text-[15px]">
+            Arnav Singhal is a Computer Science graduate from{" "}
+            <span className="text-primary font-semibold">Vellore Institute of Technology</span>,
+            driven by curiosity and a strong passion for building scalable, impactful technology
+            solutions.
           </p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
-            About Me
-          </h2>
-        </motion.div>
+          <p className="font-sans-body text-foreground/90 leading-relaxed text-[15px]">
+            Currently a <span className="text-primary font-semibold">Data Visualization Developer
+            at S&amp;P Global</span>, building interactive 2D and 3D visualization templates,
+            automating chart production through the Flourish API, and shipping internal
+            AI-powered agents that streamline editorial and content workflows.
+          </p>
+          <p className="font-sans-body text-foreground/90 leading-relaxed text-[15px]">
+            Operations sit at the intersection of{" "}
+            <span className="text-accent">Front-End Engineering</span>,{" "}
+            <span className="text-accent">Data Visualization</span>,{" "}
+            <span className="text-accent">Artificial Intelligence</span> and{" "}
+            <span className="text-accent">Automation</span> — specializing in software
+            implementation, data-driven analysis and intelligent system design that optimize
+            workflows, enhance business processes and enable informed decision-making.
+          </p>
+          <p className="font-sans-body text-foreground/90 leading-relaxed text-[15px]">
+            Management style is rooted in <span className="text-accent">discipline</span>,{" "}
+            <span className="text-accent">creativity</span> and{" "}
+            <span className="text-accent">continuous learning</span> — every challenge is
+            approached with precision, adaptability and a results-oriented mindset.
+          </p>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a Computer Science graduate from{" "}
-              <span className="text-foreground font-medium">Vellore Institute of Technology</span>,
-              driven by curiosity and a strong passion for building scalable, impactful technology solutions.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              My professional interests lie at the intersection of{" "}
-              <span className="text-foreground font-medium">Software Engineering</span>,{" "}
-              <span className="text-foreground font-medium">Data Analytics</span>,{" "}
-              <span className="text-foreground font-medium">Artificial Intelligence</span>, and{" "}
-              <span className="text-foreground font-medium">Automation</span>. I specialize in{" "}
-              <span className="text-foreground font-medium">software implementation</span>,{" "}
-              <span className="text-foreground font-medium">data-driven analysis</span>, and intelligent{" "}
-              <span className="text-foreground font-medium">system design</span>, leveraging technology 
-              to optimize workflows, enhance business processes, and enable informed decision-making.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Beyond technical expertise, I bring a mindset rooted in{" "}
-              <span className="text-foreground font-medium">discipline, creativity</span>, and{" "}
-              <span className="text-foreground font-medium">continuous learning</span>. 
-              Whether developing robust applications, analyzing complex datasets, or exploring emerging technologies, 
-              I approach every challenge with precision, adaptability, and a results-oriented mindset.
-            </p>
-          </motion.div>
+          {/* Analyst rating meter */}
+          <div className="pt-4 border-t border-border/60">
+            <div className="flex items-center justify-between text-[10px] tracking-widest text-muted-foreground mb-2">
+              <span>ANALYST RECOMMENDATION</span>
+              <span className="text-up font-bold text-glow-up">STRONG HIRE</span>
+            </div>
+            <div className="flex h-2 gap-px" role="img" aria-label="Analyst recommendation: strong hire">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`flex-1 ${i < 18 ? "bg-up" : "bg-muted"}`}
+                  style={{ opacity: i < 18 ? 0.35 + (i / 20) * 0.65 : 1 }}
+                />
+              ))}
+            </div>
+            <div className="flex justify-between text-[9px] text-muted-foreground mt-1 tracking-wider">
+              <span>PASS</span>
+              <span>INTERVIEW</span>
+              <span>HIRE</span>
+              <span className="text-up">STRONG HIRE</span>
+            </div>
+          </div>
+        </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="grid gap-4"
-          >
-            {highlights.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="bg-card p-8 rounded-2xl shadow-card hover:shadow-elevated transition-all duration-300 group"
-              >
-                <div className="flex gap-4 items-start">
-                  <div className="p-3 rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-white transition-all duration-300">
-                    <item.icon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-xl font-semibold text-foreground mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+        {/* Key facts table */}
+        <div className="lg:col-span-2">
+          <h3 className="text-primary text-xs tracking-widest mb-3">KEY FACTS</h3>
+          <table className="w-full text-xs">
+            <tbody>
+              {KEY_FACTS.map(([k, v]) => (
+                <tr key={k} className="border-b border-border/50 last:border-0">
+                  <td className="py-2.5 text-muted-foreground tracking-wider pr-3 whitespace-nowrap align-top">
+                    {k}
+                  </td>
+                  <td className="py-2.5 text-foreground font-semibold text-right tracking-wide">
+                    {v}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div className="mt-4 border border-border/60 bg-secondary/40 p-3">
+            <p className="text-[10px] text-muted-foreground tracking-wider leading-relaxed">
+              RISK DISCLOSURE: prolonged exposure to ARNAV may result in shipped products,
+              cleaner dashboards and an unusually organized backlog.
+            </p>
+          </div>
         </div>
       </div>
-    </section>
+    </Panel>
   );
 };
 
